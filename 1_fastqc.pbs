@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#############  Script para submissao de jobs ao BioCluster  ####################
+
+## 1 - Preencha o nome do diretorio onde sera executado no item (1) abaixo
+## 2 - Opcionalmente informe o nome dos programas que vai utilizar em (2)
+## 3 - Em (4) coloque a linha de comando que gostaria de executar, apague o `hello world` de exemplo.
+## 4 - Submeta ao cluster com o comando qsub e o nome deste arquivo, exemplo: $> qsub biocluster.txt
+## 5 - Confira o arquivo "log" que foi gerado no diretorio.
+
+
+## 1) Preencha corretamente o nome do diretorio abaixo.
+##    Certifique-se que este diretorio contem todos arquivos que ira precisar.
+##    O diretorio deve estar dentro da pasta "shared".
+
+
+cd /home/cluster/shared/francine/bqi760/genoma
+
+
+## 2) Caso queira verificar se os programas a utilizar estao instalados:
+##    nomeie-os abaixo separando-os por espaco.
+
+PROGRAMAS="Trinity TrimmomaticPE blastn XXXXYYY"
+
+## 3) Os comandos abaixo sao apenas para rastreio de erros.
+##    verifique que o programa "XXXXYYY" nao tem local de instalação no log.
+echo $PWD > log
+echo $HOSTNAME >>log
+echo `date` >>log
+echo $PATH >> log
+for p in $PROGRAMAS ; do echo "Local do programa $p: `which $p`" ; done >> log
+
+## 4) Oque estiver escrito abaixo sera executado em um dos nos do servidor
+##    Apague as linhas abaixo, e escreva o comando a ser executado
+
+
+fastqc SRR396637.sra_1.fastq
+fastqc SRR396637.sra_2.fastq
